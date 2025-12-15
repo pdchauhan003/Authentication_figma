@@ -14,7 +14,7 @@ function ForgotPass() {
     const handleSend = async (e) => {
         e.preventDefault();
         try {
-          const res = await axios.post("http://localhost:1290/forgot", {email});
+          const res = await axios.post("https://authentication-figma.onrender.com/forgot", {email});
           if (res.data.status == "ok") {
             toast.success(res.data.message)
             localStorage.setItem('tempEmail',email);
