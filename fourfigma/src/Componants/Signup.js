@@ -17,7 +17,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://authentication-figma.onrender.com/signup", fdata);
+      const res = await axios.post("http://localhost:1290/signup", fdata);
       if (res.data.status == "ok") {
         toast.success(res.data.message);
         navigate("/signin");

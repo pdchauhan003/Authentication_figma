@@ -13,7 +13,7 @@ function Signin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://authentication-figma.onrender.com/signin", { email, password });
+      const res = await axios.post("http://localhost:1290/signin", { email, password });
       if (res.data.status !== "ok") {
         toast.error(res.data.message);
         setForgo(true);

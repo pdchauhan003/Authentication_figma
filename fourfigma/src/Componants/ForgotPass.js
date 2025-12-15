@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import {ArrowLeft} from 'lucide-react';
+import {ArrowLeft, Cookie} from 'lucide-react';
 import toast from 'react-hot-toast';
 function ForgotPass() {
     const [email, setEmail]=useState('');
@@ -14,7 +14,7 @@ function ForgotPass() {
     const handleSend = async (e) => {
         e.preventDefault();
         try {
-          const res = await axios.post("https://authentication-figma.onrender.com/forgot", {email});
+          const res = await axios.post("http://localhost:1290/forgot", {email});
           if (res.data.status == "ok") {
             toast.success(res.data.message)
             localStorage.setItem('tempEmail',email);

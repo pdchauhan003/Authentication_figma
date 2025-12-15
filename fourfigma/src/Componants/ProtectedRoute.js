@@ -11,7 +11,7 @@ function ProtectedRoute({ children }) {
       const token = localStorage.getItem("token");
       if (!token) { setAllowed(false); setLoading(false); return; }
       try {
-        const res = await axios.get("https://authentication-figma.onrender.com/dashboard", {headers:{ Authorization: localStorage.getItem("token") }});
+        const res = await axios.get("http://localhost:1290/dashboard", {headers:{ Authorization: localStorage.getItem("token") }});
         if (res.data.status === "ok"){
            setAllowed(true);
       }

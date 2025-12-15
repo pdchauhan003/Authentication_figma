@@ -12,6 +12,8 @@ import ChangePass from './Componants/ChangePass';
 import SecondPage from './Componants/SecondPage';
 import OtpPage from './Componants/OtpPage';
 import {Toaster} from 'react-hot-toast'
+import ProtectedOtp from './Componants/ProtectedOtp';
+import ProtectedPass from './Componants/ProtectedPass';
 function Main() {
   const [bool, setBool] = useState(true);
 
@@ -20,12 +22,12 @@ function Main() {
     return () => clearTimeout(timer);
   }, []);
   
-  const isStepAllowed = (step) => {
-    if (step == "forgot") return true;
-    if (localStorage.getItem("tempEmail") && step == "varifyotp") return true;
-    if (localStorage.getItem("tempEmail") && step == "passchange" ) return true;
-    return false;
-  };
+//   const isStepAllowed = () => {
+//     // if (step == "forgot") return true;
+//     if (localStorage.getItem("tempEmail")) return true;
+//     if (localStorage.getItem("resetEmail")) return true;
+//     return false;
+//   };
 
   return (
     <BrowserRouter>
@@ -39,20 +41,20 @@ function Main() {
             <Route path="/signup" element={<Signup/>} />
             <Route path="/forgot" element={<ForgotPass/>} />
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            {/* <Route path='/passchange' element={<ChangePass/>}/> */}
-            <Route
+            <Route path='/passchange' element={<ProtectedPass><ChangePass/></ProtectedPass>}/>
+            {/* <Route
               path="/passchange"
               element={
-                isStepAllowed("passchange") ? <ChangePass /> : <Navigate to="/signin" />
+                isStepAllowed() ? <ChangePass /> : <Navigate to="/signin" />
               }
-            />
-            {/* <Route path='/varifyotp' element={<OtpPage/>}/> */}
-            <Route
+            /> */}
+            <Route path='/varifyotp' element={<ProtectedOtp><OtpPage/></ProtectedOtp>}/>
+            {/* <Route
               path="/varifyotp"
               element={
-                isStepAllowed("varifyotp") ? <OtpPage /> : <Navigate to="/signin" />
+                isStepAllowed() ? <OtpPage /> : <Navigate to="/signin" />
               }
-            />
+            /> */}
           </>
         )}
       </Routes>

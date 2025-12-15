@@ -193,6 +193,9 @@ app.post('/passchange',async(req,res)=>{
     if(!user){
       return res.json({message:"Email not found" });
     }
+    if(!(password.length > 5 && /[A-Z]/.test(password) && /[a-z]/.test(password) && /[^A-Za-z0-9]/.test(password))){
+      return res.json({ status: "error", message: "Password must contain uppercase, lowercase, symbol and minimum length 6" })
+    }
     user.password = password;
     user.otp = null;
     await user.save();

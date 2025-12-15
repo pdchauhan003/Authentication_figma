@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Cookie } from 'lucide-react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 function OtpPage(){
@@ -9,18 +9,19 @@ function OtpPage(){
     const emails=localStorage.getItem('tempEmail');
     // useEffect(()=>{
     //     if(email){
-    //         axios.post("https://authentication-figma.onrender.com/resendotp",{email});
+    //         axios.post("http://localhost:1290/resendotp",{email});
     //     }
     // },[email])
     const handleVarify=async(e)=>{
         e.preventDefault();
        try{
-            const res=await axios.post("https://authentication-figma.onrender.com/varifyotp",{
+            const res=await axios.post("http://localhost:1290/varifyotp",{
             otp,
             email:emails
         })
         if(res.data.status=='ok'){
             toast.success('otp vaArified')
+            localStorage.setItem('resetEmail',emails)
             navigate('/passchange');
         }
         else if(res.data.status=='wrong'){
@@ -42,8 +43,8 @@ function OtpPage(){
     const handleResend=async()=>{
         try{
             
-            var res=await axios.post("https://authentication-figma.onrender.com/resendotp",{
-                emails
+            var res=await axios.post("http://localhost:1290/resendotp",{
+                email:emails
             });
             if(res.data.status=='ok'){
                 alert('resend otp in mailll')

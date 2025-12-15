@@ -1,26 +1,30 @@
 import React ,{useState}from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Cookie } from 'lucide-react';
 import toast from 'react-hot-toast';
 function ChangePass(){
     const[password,setPassword]=useState('');
     const[confirmPass,setConfirmPass]=useState('');
     const navigate=useNavigate();
-    const email=localStorage.getItem('tempEmail');
+    const email=localStorage.getItem('resetEmail');
     const handleChange=async(e)=>{
         e.preventDefault();
         if (password !== confirmPass) {
             return toast.error("Password and Confirm Password do not match!");
         }
-        const res=await axios.post('https://authentication-figma.onrender.com/passchange',{
+        const res=await axios.post('http://localhost:1290/passchange',{
             email,password,
         });
         if (res.data.status === "ok") {
             toast.success("Password changed successfully");
             localStorage.removeItem("tempEmail");
+            localStorage.removeItem("resetEmail");
             navigate("/signin");
         } 
+        if(res.data.status === "error"){
+            toast.error(res.data.error)
+        }
         else {
             toast.error("Error changing password");
         }
