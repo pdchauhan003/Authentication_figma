@@ -13,7 +13,7 @@ function ChangePass(){
         if (password !== confirmPass) {
             return toast.error("Password and Confirm Password do not match!");
         }
-        const res=await axios.post('http://localhost:1290/passchange',{
+        const res=await axios.post('https://authentication-figma.onrender.com/passchange',{
             email,password,
         });
         if (res.data.status === "ok") {

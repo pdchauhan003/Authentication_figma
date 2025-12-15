@@ -9,13 +9,13 @@ function OtpPage(){
     const emails=localStorage.getItem('tempEmail');
     // useEffect(()=>{
     //     if(email){
-    //         axios.post("http://localhost:1290/resendotp",{email});
+    //         axios.post("https://authentication-figma.onrender.com/resendotp",{email});
     //     }
     // },[email])
     const handleVarify=async(e)=>{
         e.preventDefault();
        try{
-            const res=await axios.post("http://localhost:1290/varifyotp",{
+            const res=await axios.post("https://authentication-figma.onrender.com/varifyotp",{
             otp,
             email:emails
         })
@@ -42,7 +42,7 @@ function OtpPage(){
     const handleResend=async()=>{
         try{
             
-            var res=await axios.post("http://localhost:1290/resendotp",{
+            var res=await axios.post("https://authentication-figma.onrender.com/resendotp",{
                 emails
             });
             if(res.data.status=='ok'){
