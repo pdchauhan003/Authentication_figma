@@ -1,0 +1,11 @@
+#div1{
+    border:1px solid black;height:100%;width:70%;
+    transition:height 3s,width 3s;transition-duration:4s
+}
+.im1{ width: 40px; height: 40px; max-width:300px; max-height:300px;
+     min-width: 150px;min-height: 150px;border-radius: 50%;
+    transition:height 3s,width 3s ;transition-duration:3s}
+
+.im1:active{width: 90px; height: 90px; max-width:700px; max-height:700px;
+     min-width: 150px;min-height: 150px;border-radius: 50%;
+}
