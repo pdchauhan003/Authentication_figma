@@ -181,7 +181,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:1290/signup", fdata);
+      const res = await axios.post("https://authentication-figma.onrender.com/signup", fdata);
       if (res.data.status == "ok") {
         alert(res.data.message);
         navigate("/signin");
@@ -261,7 +261,7 @@ function Signin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:1290/signin", { email, password });
+      const res = await axios.post("https://authentication-figma.onrender.com/signin", { email, password });
       if (res.data.status!== "ok") {
         alert(res.data.message);
         return;
@@ -336,7 +336,7 @@ function ForgotPass() {
     const handleSend = async (e) => {
         e.preventDefault();
         try {
-          const res = await axios.post("http://localhost:1290/forgot", {email});
+          const res = await axios.post("https://authentication-figma.onrender.com/forgot", {email});
           if (res.data.status == "ok") {
             toast.success(res.data.message)
             localStorage.setItem('tempEmail',email);
@@ -398,7 +398,7 @@ function ChangePass(){
         if (password !== confirmPass) {
             return toast.error("Password and Confirm Password do not match!");
         }
-        const res=await axios.post('http://localhost:1290/passchange',{
+        const res=await axios.post('https://authentication-figma.onrender.com/passchange',{
             email,password,
         });
         if (res.data.status === "ok") {
@@ -458,7 +458,7 @@ function ProtectedRoute({ children }) {
       const token = localStorage.getItem("token");
       if (!token) { setAllowed(false); setLoading(false); return; }
       try {
-        const res = await axios.get("http://localhost:1290/dashboard", {headers:{ Authorization: localStorage.getItem("token") }});
+        const res = await axios.get("https://authentication-figma.onrender.com/dashboard", {headers:{ Authorization: localStorage.getItem("token") }});
         if (res.data.status === "ok"){
            setAllowed(true);
       }
@@ -511,13 +511,13 @@ function OtpPage(){
     const emails=localStorage.getItem('tempEmail');
     // useEffect(()=>{
     //     if(email){
-    //         axios.post("http://localhost:1290/resendotp",{email});
+    //         axios.post("https://authentication-figma.onrender.com/resendotp",{email});
     //     }
     // },[email])
     const handleVarify=async(e)=>{
         e.preventDefault();
        try{
-            const res=await axios.post("http://localhost:1290/varifyotp",{
+            const res=await axios.post("https://authentication-figma.onrender.com/varifyotp",{
             otp,
             email:emails
         })
@@ -545,7 +545,7 @@ function OtpPage(){
     const handleResend=async()=>{
         try{
             
-            var res=await axios.post("http://localhost:1290/resendotp",{
+            var res=await axios.post("https://authentication-figma.onrender.com/resendotp",{
                 email:emails
             });
             if(res.data.status=='ok'){
